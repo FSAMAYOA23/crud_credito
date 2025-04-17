@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-SgOJa3DmI69IUzQ2PVdRZhwQ+dy64/BUtbMJw1MZ8t5HZApcHrRKUc4W0kG879m7" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/js/bootstrap.bundle.min.js" integrity="sha384-k6d4wzSIapyDyv1kpU366/PK5hCdSbCRGRCMv+eplOQJWyd1fbcAu9OCUj5zNLiq" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+</head>
+<body>
+    <h1 class="text-center mt-5 mb-5 text-primary">CRUD DE CREDITOS</h1>
+
+    <div class="container mt-5">
+        <div class="row justify-content-center">
+            <div class="col-md-8">
+                <div class="row mb-3">
+                    <div class="col-md-12 d-flex justify-content-between align-items-center">
+                        <div>
+                            <strong>Francisco Samayoa Carmona</strong>
+                        </div>
+                
+                        <div>
+                            <form action="/buscar" method="GET" class="d-flex">
+                                <input type="text" name="query" class="form-control me-2" placeholder="Buscar...">
+                                <button type="submit" class="btn btn-secondary">Buscar</button>
+                            </form>
+                        </div>
+                
+                        <div>
+                            <a href="/new_user" class="btn btn-success">Crear Usuario</a>
+                        </div>
+                        <div>
+                            <a href="/graficar" class="btn btn-warning">Grafica</a>
+                        </div>
+                    </div>
+                </div>
+                <table class="table table-bordered">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Cliente</th>
+                            <th>Monto</th>
+                            <th>Tasa de Interés</th>
+                            <th>Plazo</th>
+                            <th>Fecha de Otorgamiento</th>
+                            <th>Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for credito in registros %}
+                        <tr>
+                            <td>{{ credito.id }}</td>
+                            <td>{{ credito.cliente }}</td>
+                            <td>{{ credito.monto }}</td>
+                            <td>{{ credito.tasa_interes }}</td>
+                            <td>{{ credito.plazo }}</td>
+                            <td>{{ credito.fecha_otorgamiento }}</td>
+                            <td>
+                                <a href="/edit_user/{{ credito.id }}" class="btn btn-primary btn-sm">
+                                    <i class="fas fa-pencil-alt"></i>
+                                </a>
+                                <form action="/eliminar/{{ credito.id }}" method="POST" style="display: inline;" onsubmit="return confirm('¿Estás seguro de que deseas eliminar este registro?');">
+                                    <button type="submit" class="btn btn-danger btn-sm">
+                                        <i class="fas fa-trash-alt"></i>
+                                    </button>
+                                </form>
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
